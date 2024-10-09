@@ -1,6 +1,6 @@
 import React from "react";
 import LogoA from "../img/LogoA.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 export const Home = () => {
   return (
@@ -24,7 +24,7 @@ export const Home = () => {
           <img src={LogoA} alt="LogoA" />
 
           <div className="container-fluid " style={{ marginLeft: "200px" }}>
-            <h1 className="text-light">What is Happening</h1>
+            <h1 className="text-light">What's happening</h1>
             <br />
 
             <h2 className="text-light">Registrate</h2>
