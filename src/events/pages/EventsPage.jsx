@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../auth/contexts/AuthContext";
 import LogoA from "../../img/LogoA.png";
 import { Link, useNavigate } from "react-router-dom";
 
 export const EventsPage = () => {
   const navigate = useNavigate();
+  const { logOutUser } = useContext(AuthContext); // Obtén la función de cierre de sesión del contexto
 
   const handleUserClick = () => {
-    navigate('/usersprofile');
+    navigate('/UsersProfile'); 
+  };
+
+  const handleLogout = () => {
+    logOutUser(); // Llama a la función de cierre de sesión
+    navigate('/'); // Redirige a la página de inicio después de desloguearse
   };
 
   return (
@@ -42,7 +49,7 @@ export const EventsPage = () => {
             <ul style={{ listStyle: "none", padding: 0 }}>
               <li style={{ marginBottom: "20px" }}>
                 <Link
-                  to="/home"
+                  to="/events"
                   style={{
                     color: "white",
                     fontSize: "20px",
@@ -54,7 +61,7 @@ export const EventsPage = () => {
               </li>
               <li style={{ marginBottom: "20px" }}>
                 <Link
-                  to="/Profile"
+                  to="/profile"
                   style={{
                     color: "white",
                     fontSize: "20px",
@@ -102,6 +109,22 @@ export const EventsPage = () => {
               </li>
             </ul>
           </nav>
+          
+          <button
+            onClick={handleLogout}
+            style={{
+              marginTop: "20px",
+              padding: "10px 20px",
+              backgroundColor: "#FF4500",
+              color: "white",
+              borderRadius: "50px",
+              border: "none",
+              fontWeight: "bold",
+              cursor: "pointer",
+            }}
+          >
+            Deslogear
+          </button>
         </div>
 
         <div
