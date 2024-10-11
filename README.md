@@ -2,7 +2,7 @@
 
 *Nombre del Proyecto:* Clon de Twitter
 
-*Equipo:* Equipo Alexander
+*Equipo:* Alexander
 
 *Integrantes:*
 
