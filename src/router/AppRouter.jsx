@@ -4,7 +4,7 @@ import { Home } from "../components/Home";
 import { PublicRoute } from "./PublicRoute";
 import { PrivateRoute } from "./PrivateRoute";
 import { EventsRoutes } from "../events/routes/EventsRoutes";
-import { CreateAccount } from "../auth/pages/CreateAccount"; // import create account
+import { CreateAccount } from "../auth/pages/CreateAccount";
 
 export const AppRouter = () => {
   return (

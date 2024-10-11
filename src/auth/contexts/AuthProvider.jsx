@@ -11,7 +11,7 @@ const initialState = {
 const init = () => {
   const user = JSON.parse(localStorage.getItem("user"));
 
- const isLogged = (!user) ? false : true;
+  const isLogged = !user ? false : true;
 
   const state = {
     logged: isLogged,
@@ -19,7 +19,6 @@ const init = () => {
     user,
   };
 
-  
   return state;
 };
 

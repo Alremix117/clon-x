@@ -5,15 +5,15 @@ import { Link, useNavigate } from "react-router-dom";
 
 export const EventsPage = () => {
   const navigate = useNavigate();
-  const { logOutUser } = useContext(AuthContext); // Obtén la función de cierre de sesión del contexto
+  const { logOutUser } = useContext(AuthContext); 
 
   const handleUserClick = () => {
     navigate('/UsersProfile'); 
   };
 
   const handleLogout = () => {
-    logOutUser(); // Llama a la función de cierre de sesión
-    navigate('/'); // Redirige a la página de inicio después de desloguearse
+    logOutUser();
+    navigate('/'); 
   };
 
   return (
@@ -186,7 +186,7 @@ export const EventsPage = () => {
               onClick={handleUserClick}
             >
               <h3 style={{ color: "white" }}>User1</h3>
-              <p style={{ color: "#8899A6" }}>This is a sample tweet!</p>
+              <p style={{ color: "#8899A6" }}>Esto es un ejemplo de un tweet, dandole click a este usuario se abre la pagina ejemplo de un usuario </p>
             </div>
             <div
               style={{
@@ -196,7 +196,7 @@ export const EventsPage = () => {
               }}
             >
               <h3 style={{ color: "white" }}>User2</h3>
-              <p style={{ color: "#8899A6" }}>Another tweet for testing!</p>
+              <p style={{ color: "#8899A6" }}>Esto es un ejemplo de un tweet</p>
             </div>
           </div>
         </div>

@@ -122,7 +122,7 @@ export const Post = () => {
             borderRight: "1px solid #38444D",
           }}
         >
-          <h1 style={{ color: "white", marginBottom: "20px" }}>Postear</h1>
+          <h1 style={{ color: "white", marginBottom: "20px" }}>Post</h1>
 
           <div
             style={{

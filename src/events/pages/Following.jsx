@@ -117,7 +117,7 @@ export const Following = () => {
           }}
         >
           <h1 style={{ color: "white", marginBottom: "20px" }}>Seguidos</h1>
-          {/* seguidores simulada */}
+          {/* seguidores ejemplo */}
           <ul style={{ listStyle: "none", padding: 0 }}>
             {Array.from({ length: 10 }, (_, index) => (
               <li key={index} style={{ color: "#8899A6", marginBottom: "10px" }}>

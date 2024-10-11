@@ -19,64 +19,106 @@ export const LoginPage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Retrieve user data from localStorage
     const storedUser = JSON.parse(localStorage.getItem("user"));
 
-    // Check if email and password match the stored user data
     if (
       storedUser &&
       formData.email === storedUser.email &&
       formData.password === storedUser.password
     ) {
-      // Successful login, navigate to the Events page
       navigate("/events", { replace: true });
     } else {
-      // Login failed, show an error (this could be improved with error messages)
-      alert("Email or password is incorrect");
+      alert("Email o contraseña incorrectos");
     }
   };
 
   return (
-    <div className="container">
-      <div className="row justify-content-center">
-        <div className="col-md-6">
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title text-center">Iniciar Sesión</h5>
-              <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label htmlFor="email">Correo Electrónico</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    placeholder="Ingrese su correo"
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="password">Contraseña</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    placeholder="Ingrese su contraseña"
-                    required
-                  />
-                </div>
-                <button type="submit" className="btn btn-primary btn-block">
-                  Iniciar Sesión
-                </button>
-              </form>
-            </div>
+    <div
+      style={{
+        backgroundColor: "black",
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "20px",
+      }}
+    >
+      <div
+        style={{
+          backgroundColor: "#192734",
+          borderRadius: "10px",
+          padding: "30px",
+          width: "100%",
+          maxWidth: "400px",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <h2
+          style={{ color: "white", textAlign: "center", marginBottom: "20px" }}
+        >
+          Iniciar Sesión
+        </h2>
+        <form onSubmit={handleSubmit}>
+          <div style={{ marginBottom: "15px" }}>
+            <label htmlFor="email" style={{ color: "#8899A6" }}>
+              Correo Electrónico
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              placeholder="Ingrese su correo"
+              required
+              style={{
+                width: "100%",
+                padding: "10px",
+                borderRadius: "5px",
+                border: "1px solid #38444D",
+                backgroundColor: "#253341",
+                color: "white",
+              }}
+            />
           </div>
-        </div>
+          <div style={{ marginBottom: "15px" }}>
+            <label htmlFor="password" style={{ color: "#8899A6" }}>
+              Contraseña
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              placeholder="Ingrese su contraseña"
+              required
+              style={{
+                width: "100%",
+                padding: "10px",
+                borderRadius: "5px",
+                border: "1px solid #38444D",
+                backgroundColor: "#253341",
+                color: "white",
+              }}
+            />
+          </div>
+          <button
+            type="submit"
+            style={{
+              width: "100%",
+              padding: "10px",
+              borderRadius: "5px",
+              backgroundColor: "#1DA1F2",
+              color: "white",
+              border: "none",
+              fontWeight: "bold",
+              cursor: "pointer",
+            }}
+          >
+            Iniciar Sesión
+          </button>
+        </form>
       </div>
     </div>
   );

@@ -1,13 +1,12 @@
-import React from "react"; 
+import React from "react";
 import LogoA from "../../img/LogoA.png";
 import { Link } from "react-router-dom";
 
 export const Followers = () => {
- 
-  const followersList = Array.from({ length: 10 }, (_, index) => `Usuario${index + 1}`);
-
-
-
+  const followersList = Array.from(
+    { length: 10 },
+    (_, index) => `Usuario${index + 1}`
+  );
 
   return (
     <>
@@ -102,8 +101,6 @@ export const Followers = () => {
               </li>
             </ul>
           </nav>
-
-          
         </div>
 
         <div
@@ -112,17 +109,20 @@ export const Followers = () => {
             padding: "20px",
             borderLeft: "1px solid #38444D",
             borderRight: "1px solid #38444D",
-            height: "100vh", 
-            overflowY: "auto", 
-            backgroundColor: "black", 
+            height: "100vh",
+            overflowY: "auto",
+            backgroundColor: "black",
             color: "white",
           }}
         >
           <h1 style={{ marginBottom: "20px" }}>Seguidores</h1>
-          {/* seguidores simulada */}
+          {/* seguidores ejemplo */}
           <ul style={{ listStyle: "none", padding: 0 }}>
             {followersList.map((follower, index) => (
-              <li key={index} style={{ color: "#8899A6", marginBottom: "10px" }}>
+              <li
+                key={index}
+                style={{ color: "#8899A6", marginBottom: "10px" }}
+              >
                 {follower}
               </li>
             ))}

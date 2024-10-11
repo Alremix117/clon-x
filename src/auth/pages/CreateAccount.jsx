@@ -20,84 +20,139 @@ export const CreateAccount = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     localStorage.setItem("user", JSON.stringify(formData));
-
     navigate("/", { replace: true });
   };
 
   return (
     <div
-      className="container"
       style={{
         backgroundColor: "black",
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "20px",
       }}
     >
-      <div className="row justify-content-center">
-        <div className="col-md-6">
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title text-center">Crear Cuenta</h5>
-              <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label htmlFor="fullName">Nombres Completos</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="fullName"
-                    name="fullName"
-                    value={formData.fullName}
-                    onChange={handleInputChange}
-                    placeholder="Ingrese sus nombres completos"
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="username">Nombre de Usuario</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="username"
-                    name="username"
-                    value={formData.username}
-                    onChange={handleInputChange}
-                    placeholder="Ingrese su nombre de usuario"
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="email">Correo Electrónico</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    placeholder="Ingrese su correo"
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="password">Contraseña</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    placeholder="Ingrese su contraseña"
-                    required
-                  />
-                </div>
-                <button type="submit" className="btn btn-primary btn-block">
-                  Crear cuenta
-                </button>
-              </form>
-            </div>
+      <div
+        style={{
+          backgroundColor: "#192734",
+          borderRadius: "10px",
+          padding: "30px",
+          width: "100%",
+          maxWidth: "400px",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <h2 style={{ color: "white", textAlign: "center", marginBottom: "20px" }}>
+          Crear Cuenta
+        </h2>
+        <form onSubmit={handleSubmit}>
+          <div style={{ marginBottom: "15px" }}>
+            <label htmlFor="fullName" style={{ color: "#8899A6" }}>
+              Nombres Completos
+            </label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              value={formData.fullName}
+              onChange={handleInputChange}
+              placeholder="Ingrese sus nombres completos"
+              required
+              style={{
+                width: "100%",
+                padding: "10px",
+                borderRadius: "5px",
+                border: "1px solid #38444D",
+                backgroundColor: "#253341",
+                color: "white",
+              }}
+            />
           </div>
-        </div>
+          <div style={{ marginBottom: "15px" }}>
+            <label htmlFor="username" style={{ color: "#8899A6" }}>
+              Nombre de Usuario
+            </label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={formData.username}
+              onChange={handleInputChange}
+              placeholder="Ingrese su nombre de usuario"
+              required
+              style={{
+                width: "100%",
+                padding: "10px",
+                borderRadius: "5px",
+                border: "1px solid #38444D",
+                backgroundColor: "#253341",
+                color: "white",
+              }}
+            />
+          </div>
+          <div style={{ marginBottom: "15px" }}>
+            <label htmlFor="email" style={{ color: "#8899A6" }}>
+              Correo Electrónico
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              placeholder="Ingrese su correo"
+              required
+              style={{
+                width: "100%",
+                padding: "10px",
+                borderRadius: "5px",
+                border: "1px solid #38444D",
+                backgroundColor: "#253341",
+                color: "white",
+              }}
+            />
+          </div>
+          <div style={{ marginBottom: "15px" }}>
+            <label htmlFor="password" style={{ color: "#8899A6" }}>
+              Contraseña
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              placeholder="Ingrese su contraseña"
+              required
+              style={{
+                width: "100%",
+                padding: "10px",
+                borderRadius: "5px",
+                border: "1px solid #38444D",
+                backgroundColor: "#253341",
+                color: "white",
+              }}
+            />
+          </div>
+          <button
+            type="submit"
+            style={{
+              width: "100%",
+              padding: "10px",
+              borderRadius: "5px",
+              backgroundColor: "#1DA1F2",
+              color: "white",
+              border: "none",
+              fontWeight: "bold",
+              cursor: "pointer",
+            }}
+          >
+            Crear cuenta
+          </button>
+        </form>
       </div>
     </div>
   );

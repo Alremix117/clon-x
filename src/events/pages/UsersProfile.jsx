@@ -3,7 +3,7 @@ import LogoA from "../../img/LogoA.png";
 import { Link } from "react-router-dom";
 
 export const UsersProfile = () => {
-  // Simulamos datos de usuario, puedes reemplazar esto con datos reales.
+  
   const user = {
     name: "Nombre del Usuario",
     username: "@nombredeusuario",
@@ -15,7 +15,7 @@ export const UsersProfile = () => {
 
   const posts = Array.from({ length: 10 }, (_, index) => ({
     id: index + 1,
-    content: `Este es el contenido de la publicación ${index + 1}.`,
+    content: `Este es un ejemplo de tweets del usuario ${index + 1}.`,
     date: `Fecha de publicación ${index + 1}`,
   }));
 
@@ -124,11 +124,11 @@ export const UsersProfile = () => {
             padding: "20px",
             borderLeft: "1px solid #38444D",
             borderRight: "1px solid #38444D",
-            backgroundColor: "black", // Cambiado a negro
+            backgroundColor: "black", 
             borderRadius: "10px",
             color: "white",
-            overflowY: "auto", // Habilitar scroll en la sección central
-            height: "100vh", // Ajustar altura al 100% de la ventana
+            overflowY: "auto",
+            height: "100vh", 
           }}
         >
           <h1 style={{ marginBottom: "10px" }}>Perfil de {user.name}</h1>
@@ -143,7 +143,7 @@ export const UsersProfile = () => {
             <button
               style={{
                 padding: "10px 20px",
-                backgroundColor: "#1DA1F2", // Botón azul
+                backgroundColor: "#1DA1F2", 
                 color: "white",
                 borderRadius: "50px",
                 border: "none",
@@ -161,7 +161,7 @@ export const UsersProfile = () => {
               <div
                 key={post.id}
                 style={{
-                  backgroundColor: "#192734", // Fondo de cada publicación
+                  backgroundColor: "#192734", 
                   padding: "15px",
                   borderRadius: "10px",
                   marginBottom: "20px",

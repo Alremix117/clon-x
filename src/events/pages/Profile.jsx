@@ -1,18 +1,11 @@
 import React, { useContext } from "react";
 import LogoA from "../../img/LogoA.png";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../auth/contexts/AuthContext"; 
+import { AuthContext } from "../../auth/contexts/AuthContext";
 
 export const Profile = () => {
-  const { authState } = useContext(AuthContext); 
-  const { user, logged } = authState;
-
-
-
-  
-  if (!logged) {
-    return <h1>No estás autenticado. Por favor, inicia sesión.</h1>;
-  }
+  const { authState } = useContext(AuthContext);
+  const { user } = authState;
 
   return (
     <>
@@ -107,8 +100,6 @@ export const Profile = () => {
               </li>
             </ul>
           </nav>
-
-          
         </div>
 
         <div
@@ -119,13 +110,21 @@ export const Profile = () => {
             borderRight: "1px solid #38444D",
           }}
         >
-          <h2 style={{ color: "white", marginBottom: "20px" }}>{user.fullName}</h2>
-          <h4 style={{ color: "#8899A6", marginBottom: "10px" }}>{user.username}</h4>
+          <h2 style={{ color: "white", marginBottom: "20px" }}>
+            {user.fullName}
+          </h2>
+          <h4 style={{ color: "#8899A6", marginBottom: "10px" }}>
+            {user.username}
+          </h4>
+
+          <h5 style={{ color: "white", marginBottom: "20px" }}>{user.email}</h5>
           <p style={{ color: "#8899A6", marginBottom: "20px" }}>{user.bio}</p>
 
-          {/* Agregar contadores de seguidores y seguidos */}
           <div style={{ marginBottom: "20px" }}>
-            <Link to="/followers" style={{ color: "white", marginRight: "20px" }}>
+            <Link
+              to="/followers"
+              style={{ color: "white", marginRight: "20px" }}
+            >
               Seguidores: {user.followersCount}
             </Link>
             <Link to="/following" style={{ color: "white" }}>
