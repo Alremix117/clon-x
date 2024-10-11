@@ -14,7 +14,22 @@ Este proyecto se basa en la creacion de una copia de twitter, en donde por el mo
 
 *Requerimientos:*
 
-React, Yarn, Node
+Lenguaje:
+
+JavaScript
+Frameworks y Librerías:
+
+React (para la interfaz de usuario)
+React Router DOM (para la navegación)
+Bootstrap (para los estilos)
+APIs del navegador:
+
+localStorage (para almacenar datos de usuario)
+Hooks de React:
+
+useState
+useReducer
+useContext
 
 **Instrucciones de compilación y ejecución: **
 
