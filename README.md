@@ -1,6 +1,6 @@
-*Nombre de la Materia:* Programación Orientada a Objetos
+*Nombre de la Materia:* Software # 1
 
-*Nombre del Proyecto:* Sistema de Gestión de Alumnos
+*Nombre del Proyecto:* Clon de Twitter
 
 *Equipo:* Equipo Alfa
 
