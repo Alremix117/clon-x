@@ -2,7 +2,7 @@
 
 *Nombre del Proyecto:* Clon de Twitter
 
-*Equipo:* Equipo Alfa
+*Equipo:* Equipo Alexander
 
 *Integrantes:*
 
@@ -10,23 +10,16 @@ Fredt Alexander Olivero Zapata
 
 *Descripción:*
 
-Este proyecto implementa un sistema para gestionar información de alumnos, incluyendo matriculación, notas y generación de reportes.
+Este proyecto se basa en la creacion de una copia de twitter, en donde por el momento se han implementado las funcionalidades de creacion y inicio de sesion, a parte de la maquetacion basica
 
 *Requerimientos:*
 
-Java 11
-
-* Maven
-
-Base de datos PostgreSQL
+React, Yarn, Node
 
 **Instrucciones de compilación y ejecución: **
 
 1. Clonar el repositorio.
 
-2. Ejecutar mvn clean package para compilar el proyecto.
+2. Ejecutar Yarn dev en la terminal, pero previamente revisar y tener bien configurado yarn.
 
-3. Ejecutar java -jar target/sistema-gestion-alumnos.jar para iniciar la aplicación.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
