@@ -186,7 +186,7 @@ export const EventsPage = () => {
               onClick={handleUserClick}
             >
               <h3 style={{ color: "white" }}>User1</h3>
-              <p style={{ color: "#8899A6" }}>Esto es un ejemplo de un tweet, dandole click a este usuario se abre la pagina ejemplo de un usuario </p>
+              <p style={{ color: "#8899A6" }}>Esto es un ejemplo de un tweet dandole click a este usuario se abre la pagina ejemplo de un usuario </p>
             </div>
             <div
               style={{
