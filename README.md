@@ -22,4 +22,6 @@ React, Yarn, Node
 
 2. Ejecutar Yarn dev en la terminal, pero previamente revisar y tener bien configurado yarn.
 
+**Anotacion:**
 
+Por el momento toca recargar la pagina (componente) de profile debido a que por primera visualizacion de la misma no se trae la informacion del usuario logeado antes de ejecutar la visualizacion del componente, al recargar todo funciona bien.
