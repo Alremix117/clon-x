@@ -4,12 +4,12 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore/lite";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDubk9ue5xmtOkkDV6BWT5TzR-2cp1I_mg",
-  authDomain: "twitter-ee79b.firebaseapp.com",
-  projectId: "twitter-ee79b",
-  storageBucket: "twitter-ee79b.firebasestorage.app",
-  messagingSenderId: "95097823439",
-  appId: "1:95097823439:web:943c24d85719d8644657ba"
+  apiKey: "AIzaSyA8IhP0URuw5ken1JfOXKYXHhbmWuptnEU",
+  authDomain: "events-31355.firebaseapp.com",
+  projectId: "events-31355",
+  storageBucket: "events-31355.appspot.com",
+  messagingSenderId: "595721062595",
+  appId: "1:595721062595:web:3063145e874a1e69f97a76"
 };
 
 // Initialize Firebase
