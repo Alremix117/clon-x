@@ -1,6 +1,6 @@
+import { useReducer } from "react";
 import { AuthContext } from "./AuthContext";
 import { authReducer } from "../reducers/authReducer";
-import { useReducer } from "react";
 import { useAuth } from "../hooks/useAuth";
 
 const initialState = {
@@ -15,7 +15,6 @@ const init = () => {
 
   const state = {
     logged: isLogged,
-
     user,
   };
 
@@ -25,10 +24,13 @@ const init = () => {
 export const AuthProvider = ({ children }) => {
   const [authState, dispatch] = useReducer(authReducer, initialState, init);
 
-  const { logInUser, logOutUser } = useAuth(dispatch);
+  const { logInUser, logOutUser, signUpUser, logInWithGoogle } =
+    useAuth(dispatch);
 
   return (
-    <AuthContext.Provider value={{ authState, logInUser, logOutUser }}>
+    <AuthContext.Provider
+      value={{ authState, logInUser, logOutUser, signUpUser, logInWithGoogle }}
+    >
       {children}
     </AuthContext.Provider>
   );

@@ -1,125 +1,118 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { useForm } from "../../hooks/useForm";
+import { AuthContext } from "../contexts/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
+
+const initForm = {
+  email: "",
+  password: "",
+};
 
 export const LoginPage = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+  const {
+    authState: { errorMessage },
+    logInUser,
+    logInWithGoogle,
+  } = useContext(AuthContext);
 
-  const handleSubmit = (event) => {
+  const { email, password, onInputChange } = useForm(initForm);
+
+  const onLogin = async (event) => {
     event.preventDefault();
 
-    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const isValidLogin = await logInUser(email, password);
 
-    if (
-      storedUser &&
-      formData.email === storedUser.email &&
-      formData.password === storedUser.password
-    ) {
+    if (isValidLogin) {
       navigate("/events", { replace: true });
-    } else {
-      alert("Email o contraseña incorrectos");
+    }
+  };
+
+  const onLoginWithGoogle = async (event) => {
+    event.preventDefault();
+
+    const isValidLogin = await logInWithGoogle();
+
+    if (isValidLogin) {
+      navigate("/events", { replace: true });
     }
   };
 
   return (
-    <div
-      style={{
-        backgroundColor: "black",
-        minHeight: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        padding: "20px",
-      }}
-    >
-      <div
-        style={{
-          backgroundColor: "#192734",
-          borderRadius: "10px",
-          padding: "30px",
-          width: "100%",
-          maxWidth: "400px",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        }}
-      >
-        <h2
-          style={{ color: "white", textAlign: "center", marginBottom: "20px" }}
-        >
-          Iniciar Sesión
-        </h2>
-        <form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: "15px" }}>
-            <label htmlFor="email" style={{ color: "#8899A6" }}>
-              Correo Electrónico
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleInputChange}
-              placeholder="Ingrese su correo"
-              required
-              style={{
-                width: "100%",
-                padding: "10px",
-                borderRadius: "5px",
-                border: "1px solid #38444D",
-                backgroundColor: "#253341",
-                color: "white",
-              }}
-            />
+    <>
+      <div className='container vh-100 d-flex justify-content-center align-items-center'>
+        <div className='row w-100'>
+          <div className='col-md-6 mx-auto'>
+            <div className='card animate__animated animate__jackInTheBox'>
+              <div className='card-body'>
+                <h5 className='card-title text-center'>Inicio de Sesión</h5>
+                <form>
+                  <div className='form-group'>
+                    <label htmlFor='email'>Correo Electrónico</label>
+                    <input
+                      type='email'
+                      className='form-control'
+                      id='email'
+                      name='email'
+                      value={email}
+                      onChange={onInputChange}
+                      placeholder='Ingrese su correo electrónico'
+                    />
+                  </div>
+                  <div className='form-group'>
+                    <label htmlFor='password'>Contraseña</label>
+                    <input
+                      type='password'
+                      className='form-control'
+                      id='password'
+                      name='password'
+                      value={password}
+                      onChange={onInputChange}
+                      placeholder='Ingrese su contraseña'
+                    />
+                  </div>
+                  <br />
+                  {errorMessage && (
+                    <div className='alert alert-danger' role='alert'>
+                      {errorMessage}
+                    </div>
+                  )}
+
+                  <div className='form-group'>
+                    <div className='row'>
+                      <div className='col-md-4'>
+                        <button
+                          type='submit'
+                          className='btn btn-primary btn-lg btn-block'
+                          onClick={onLogin}
+                        >
+                          Iniciar Sesión
+                        </button>
+                      </div>
+                      <div className='col-md-8'>
+                        <button
+                          type='submit'
+                          className='btn btn-danger btn-lg btn-block'
+                          onClick={onLoginWithGoogle}
+                        >
+                          Inicia con Google
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className='form-group'>
+                    <Link to={"/register"} className=''>
+                      Aun no tienes cuenta? registrate aqui.{" "}
+                    </Link>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
-          <div style={{ marginBottom: "15px" }}>
-            <label htmlFor="password" style={{ color: "#8899A6" }}>
-              Contraseña
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleInputChange}
-              placeholder="Ingrese su contraseña"
-              required
-              style={{
-                width: "100%",
-                padding: "10px",
-                borderRadius: "5px",
-                border: "1px solid #38444D",
-                backgroundColor: "#253341",
-                color: "white",
-              }}
-            />
-          </div>
-          <button
-            type="submit"
-            style={{
-              width: "100%",
-              padding: "10px",
-              borderRadius: "5px",
-              backgroundColor: "#1DA1F2",
-              color: "white",
-              border: "none",
-              fontWeight: "bold",
-              cursor: "pointer",
-            }}
-          >
-            Iniciar Sesión
-          </button>
-        </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
