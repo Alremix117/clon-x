@@ -1,32 +1,44 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AuthContext } from "../../auth/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 import LogoA from "../../img/LogoA.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { EventContext } from "../contexts/EventContext";
 
 export const EventsPage = () => {
   const navigate = useNavigate();
-  const { logOutUser } = useContext(AuthContext); 
+  const { logOutUser } = useContext(AuthContext);
+  const {
+    eventState: { events, errorMessage },
+    loadEvents,
+  } = useContext(EventContext);
+
+  // Cargar eventos al montar el componente
+  useEffect(() => {
+    loadEvents();
+  }, [loadEvents]);
 
   const handleUserClick = () => {
-    navigate('/UsersProfile'); 
+    navigate("/UsersProfile");
   };
 
   const handleLogout = () => {
     logOutUser();
-    navigate('/'); 
+    navigate("/");
   };
 
   return (
     <>
       <div
         style={{
-          backgroundColor: "black", 
+          backgroundColor: "black",
           width: "100%",
           height: "100vh",
           display: "flex",
           flexDirection: "row",
         }}
       >
+        {/* Sidebar */}
         <div
           style={{
             width: "20%",
@@ -97,7 +109,7 @@ export const EventsPage = () => {
               </li>
               <li style={{ marginBottom: "20px" }}>
                 <Link
-                  to="/post"
+                  to="/new-event"
                   style={{
                     color: "white",
                     fontSize: "20px",
@@ -109,7 +121,6 @@ export const EventsPage = () => {
               </li>
             </ul>
           </nav>
-          
           <button
             onClick={handleLogout}
             style={{
@@ -127,6 +138,7 @@ export const EventsPage = () => {
           </button>
         </div>
 
+        {/* Content Area */}
         <div
           style={{
             width: "60%",
@@ -139,68 +151,45 @@ export const EventsPage = () => {
             What's happening
           </h2>
 
-          <div
-            style={{
-              backgroundColor: "#192734",
-              padding: "15px",
-              borderRadius: "10px",
-              marginBottom: "20px",
-            }}
-          >
-            <textarea
-              placeholder="What's happening?"
-              style={{
-                width: "100%",
-                height: "80px",
-                backgroundColor: "transparent",
-                color: "white",
-                border: "none",
-                outline: "none",
-                resize: "none",
-              }}
-            ></textarea>
-            <button
-              style={{
-                marginTop: "10px",
-                padding: "10px 20px",
-                backgroundColor: "#1DA1F2",
-                color: "white",
-                borderRadius: "50px",
-                border: "none",
-                fontWeight: "bold",
-                cursor: "pointer",
-              }}
-            >
-              Tweet
-            </button>
+          {/* Events List */}
+          <div className="row">
+            {events.map((event) => (
+              <div className="col-md-6 col-lg-4 mb-4" key={event.id}>
+                <div
+                  className="card animate__animated animate__fadeInUp"
+                  style={{
+                    backgroundColor: "#192734",
+                    padding: "15px",
+                    borderRadius: "10px",
+                    marginBottom: "20px",
+                  }}
+                  onClick={handleUserClick}
+                >
+                  <img
+                    src={event.imageUrl} // Asegúrate de que este campo existe en tu objeto event
+                    alt={`Imagen del evento ${event.name}`}
+                    style={{
+                      width: "100%",
+                      height: "200px",
+                      objectFit: "cover",
+                      borderRadius: "10px",
+                      marginBottom: "10px",
+                    }}
+                  />
+                  <h3 style={{ color: "white" }}>{event.name}</h3>
+                  <p style={{ color: "#8899A6" }}>{event.description}</p>
+                  <p style={{ color: "#8899A6" }}>Fecha: {event.date}</p>
+                </div>
+              </div>
+            ))}
           </div>
 
-          <div>
-            <div
-              style={{
-                backgroundColor: "#192734",
-                padding: "15px",
-                borderRadius: "10px",
-                marginBottom: "20px",
-              }}
-              onClick={handleUserClick}
-            >
-              <h3 style={{ color: "white" }}>User1</h3>
-              <p style={{ color: "#8899A6" }}>Esto es un ejemplo de un tweet dandole click a este usuario se abre la pagina ejemplo de un usuario </p>
-            </div>
-            <div
-              style={{
-                backgroundColor: "#192734",
-                padding: "15px",
-                borderRadius: "10px",
-              }}
-            >
-              <h3 style={{ color: "white" }}>User2</h3>
-              <p style={{ color: "#8899A6" }}>Esto es un ejemplo de un tweet</p>
-            </div>
-          </div>
+          {errorMessage && (
+            <p style={{ color: "red" }}>Error loading events: {errorMessage}</p>
+          )}
         </div>
 
+        {/* Trends Section */}
         <div
           style={{
             width: "20%",

@@ -68,33 +68,35 @@ export const useAuth = (dispatch) => {
   };
 
   const logInWithGoogle = async () => {
-    const { ok, uid, displayName, email, photoURL, errorMessage } =
-      await authWithGoogle();
-
+    const { ok, uid, displayName, email, photoURL, errorMessage } = await authWithGoogle();
+  
     if (!ok) {
       dispatch({ type: authTypes.error, payload: { errorMessage } });
       return false;
     }
-
+  
+    // Extraer el primer nombre
+    const firstName = displayName.split(" ")[0]; // Obtener el primer nombre
+  
     const payload = {
       uid,
       email,
-      displayName,
+      displayName, // Nombre completo
+      firstName,   // Primer nombre
       photoURL,
     };
-
+  
     const action = {
       type: authTypes.logIn,
       payload,
     };
-
+  
     localStorage.setItem("user", JSON.stringify(payload));
-
     dispatch(action);
-
+  
     return true;
-
   };
+  
 
   return { logInUser, logOutUser, signUpUser, logInWithGoogle };
 };
