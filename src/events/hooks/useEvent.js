@@ -16,7 +16,7 @@ export const useEvent = (loggedUser, dispatch) => {
   
       await setDoc(newDoc, {
         ...event,
-        userId: loggedUser.uid, // Guardamos el ID del usuario que creó el evento
+        userId: loggedUser.uid,  // Guardamos el ID del usuario que creó el evento
       });
   
       event.id = newDoc.id;
