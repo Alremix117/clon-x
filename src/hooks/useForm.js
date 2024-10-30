@@ -22,7 +22,6 @@ export const useForm = (initialForm = {}) => {
     formState,
     // Change functions
     onInputChange,
-    
     resetForm,
   };
 };
