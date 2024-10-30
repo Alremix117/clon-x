@@ -6,7 +6,7 @@ export const authReducer = (state = {}, action = {}) => {
       return {
         ...state,
         logged: true,
-        user: action.payload, // Contiene displayName y firstName
+        user: action.payload,  // Contiene displayName y firstName
         errorMessage: null,
       };
 
