@@ -19,35 +19,31 @@ export const NewEventPage = () => {
 
   const onCreateEvent = async (e) => {
     e.preventDefault();
-  
+
     const event = {
       name,
       date,
       imageUrl,
     };
-  
+
     await saveEvent(event);
-  
-    // Aquí no debes usar errorMessage directamente, porque puede que no se haya actualizado
+
     if (!errorMessage) {
       Swal.fire({
         title: "Created",
         text: "New event created",
         icon: "success",
       });
+
       navigate("/events", { replace: true });
     } else {
-      // Espera un pequeño tiempo para que se actualice el estado antes de verificar errorMessage
-      setTimeout(() => {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: errorMessage,
-        });
-      }, 100); // Esperar 100 ms para la actualización del estado
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: errorMessage,
+      });
     }
   };
-  
 
   return (
     <div className="container">
