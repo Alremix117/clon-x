@@ -67,12 +67,12 @@ export const NewEventPage = () => {
         }}
       >
         <h2 style={{ color: "white", textAlign: "center", marginBottom: "20px" }}>
-          Crear nuevo evento
+          Crear nuevo post
         </h2>
         <form>
           <div style={{ marginBottom: "15px" }}>
             <label htmlFor="name" style={{ color: "#8899A6" }}>
-              Nombre del Evento
+              Nombre del post
             </label>
             <input
               type="text"
@@ -94,7 +94,7 @@ export const NewEventPage = () => {
           </div>
           <div style={{ marginBottom: "15px" }}>
             <label htmlFor="date" style={{ color: "#8899A6" }}>
-              Fecha de Inicio
+              Fecha
             </label>
             <input
               type="text"
