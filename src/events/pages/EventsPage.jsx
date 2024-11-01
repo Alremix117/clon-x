@@ -13,12 +13,18 @@ export const EventsPage = () => {
     loadEvents,
   } = useContext(EventContext);
 
+  const {
+    authState: { user },
+  } = useContext(AuthContext);
+
   useEffect(() => {
     loadEvents();
   }, [loadEvents]);
 
-  const handleUserClick = () => {
-    navigate("/UsersProfile");
+  const handleEventClick = (event) => {
+    if (event.userId !== user.uid) {
+      navigate("/UsersProfile");
+    }
   };
 
   const handleLogout = () => {
@@ -162,7 +168,7 @@ export const EventsPage = () => {
                     borderRadius: "10px",
                     marginBottom: "20px",
                   }}
-                  onClick={handleUserClick}
+                  onClick={() => handleEventClick(event)}
                 >
                   <img
                     src={event.imageUrl}
