@@ -1,7 +1,5 @@
 import { useContext, useReducer } from "react";
 import { eventsReducer } from "../reducers/eventsReducer";
-
-
 import { AuthContext } from "../../auth/contexts/AuthContext";
 import { EventContext } from "./EventContext";
 import { useEvent } from "../hooks/useEvent";
@@ -25,7 +23,7 @@ export const EventProvider = ({ children }) => {
     authState: { user },
   } = useContext(AuthContext);
 
-  const { saveEvent, loadEvents} = useEvent(user, dispatch);
+  const { saveEvent, loadEvents } = useEvent(user, dispatch);
 
   return (
     <EventContext.Provider value={{ eventState, saveEvent, loadEvents }}>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import LogoA from "../../img/LogoA.png";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../auth/contexts/AuthContext";
@@ -9,7 +9,7 @@ export const Profile = () => {
   const { user } = authState;
   const { eventState } = useContext(EventContext);
   
-  // Filtrar eventos del usuario logueado
+  // Filtrar eventos creados por el usuario logueado
   const userEvents = eventState.events.filter(event => event.userId === user.uid);
 
   return (
@@ -119,7 +119,7 @@ export const Profile = () => {
           <h2 style={{ color: "white" }}>{user.displayName}'s Profile</h2>
           <p style={{ color: "white" }}>Email: {user.email}</p>
 
-          <h3 style={{ color: "white" }}>My Events</h3>
+          <h3 style={{ color: "white" }}>Mis Eventos</h3>
 
           {/* Lista de eventos del usuario */}
           <div className="row">
@@ -148,12 +148,13 @@ export const Profile = () => {
                     />
                     <h3 style={{ color: "white" }}>{event.name}</h3>
                     <p style={{ color: "#8899A6" }}>{event.description}</p>
+                    <p style={{ color: "#8899A6" }}>Creado por: {user.displayName}</p>
                     <p style={{ color: "#8899A6" }}>Fecha: {event.date}</p>
                   </div>
                 </div>
               ))
             ) : (
-              <p style={{ color: "#8899A6" }}>No events created yet.</p>
+              <p style={{ color: "#8899A6" }}>No has creado ningún evento.</p>
             )}
           </div>
         </div>
@@ -166,16 +167,16 @@ export const Profile = () => {
             color: "white",
           }}
         >
-          <h3 style={{ color: "white", marginBottom: "20px" }}>Trends</h3>
+          <h3 style={{ color: "white", marginBottom: "20px" }}>Tendencias</h3>
           <ul style={{ listStyle: "none", padding: 0 }}>
             <li style={{ marginBottom: "10px", color: "#8899A6" }}>
-              #TrendingTopic1
+              #Tendencia1
             </li>
             <li style={{ marginBottom: "10px", color: "#8899A6" }}>
-              #TrendingTopic2
+              #Tendencia2
             </li>
             <li style={{ marginBottom: "10px", color: "#8899A6" }}>
-              #TrendingTopic3
+              #Tendencia3
             </li>
           </ul>
         </div>

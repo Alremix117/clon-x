@@ -13,7 +13,6 @@ export const EventsPage = () => {
     loadEvents,
   } = useContext(EventContext);
 
-  // Cargar eventos al montar el componente
   useEffect(() => {
     loadEvents();
   }, [loadEvents]);
@@ -166,7 +165,7 @@ export const EventsPage = () => {
                   onClick={handleUserClick}
                 >
                   <img
-                    src={event.imageUrl} // Asegúrate de que este campo existe en tu objeto event
+                    src={event.imageUrl}
                     alt={`Imagen del evento ${event.name}`}
                     style={{
                       width: "100%",
@@ -178,7 +177,10 @@ export const EventsPage = () => {
                   />
                   <h3 style={{ color: "white" }}>{event.name}</h3>
                   <p style={{ color: "#8899A6" }}>{event.description}</p>
-                  <p style={{ color: "#8899A6" }}>Fecha: {event.date}</p>
+                  <p style={{ color: "#8899A6" }}>
+                    Creado por: {event.createdBy} <br />
+                    Fecha de creación: {new Date(event.createdAt).toLocaleString()}
+                  </p>
                 </div>
               </div>
             ))}

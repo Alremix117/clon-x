@@ -3,8 +3,6 @@ import {
   doc,
   getDocs,
   setDoc,
-  query,
-  where,
 } from "firebase/firestore/lite";
 import { FirebaseDB } from "../../firebase/config";
 import { eventsTypes } from "../types/eventsTypes";
@@ -12,44 +10,45 @@ import { eventsTypes } from "../types/eventsTypes";
 export const useEvent = (loggedUser, dispatch) => {
   const saveEvent = async (event) => {
     try {
-      const newDoc = doc(collection(FirebaseDB, 'events')); // Cambia esta línea
-  
+      const newDoc = doc(collection(FirebaseDB, "events"));
+
       await setDoc(newDoc, {
         ...event,
-        userId: loggedUser.uid,  // Guardamos el ID del usuario que creó el evento
+        userId: loggedUser.uid,
+        createdBy: loggedUser.displayName, // Nombre del usuario que creó el evento
+        createdAt: new Date().toISOString(), // Hora exacta de creación
       });
-  
+
       event.id = newDoc.id;
-  
+
       const action = { type: eventsTypes.saveEvent, payload: event };
-  
+
       dispatch(action);
     } catch (error) {
       dispatch({ type: eventsTypes.error, payload: error.message });
     }
   };
-  
 
   const loadEvents = async () => {
     try {
-      const collectionRef = collection(FirebaseDB, 'events'); // Cambia esta línea
-  
+      const collectionRef = collection(FirebaseDB, "events");
+
       const fbDocs = await getDocs(collectionRef);
-  
+
       const events = [];
-  
+
       fbDocs.forEach((doc) => {
         events.push({
           id: doc.id,
           ...doc.data(),
         });
       });
-  
+
       const action = {
         type: eventsTypes.loadEvents,
         payload: events,
       };
-  
+
       dispatch(action);
     } catch (error) {
       const action = {
@@ -59,7 +58,6 @@ export const useEvent = (loggedUser, dispatch) => {
       dispatch(action);
     }
   };
-  
 
   return { saveEvent, loadEvents };
 };
