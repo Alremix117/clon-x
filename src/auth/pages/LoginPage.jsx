@@ -40,79 +40,117 @@ export const LoginPage = () => {
   };
 
   return (
-    <>
-      <div className='container vh-100 d-flex justify-content-center align-items-center'>
-        <div className='row w-100'>
-          <div className='col-md-6 mx-auto'>
-            <div className='card animate__animated animate__jackInTheBox'>
-              <div className='card-body'>
-                <h5 className='card-title text-center'>Inicio de Sesión</h5>
-                <form>
-                  <div className='form-group'>
-                    <label htmlFor='email'>Correo Electrónico</label>
-                    <input
-                      type='email'
-                      className='form-control'
-                      id='email'
-                      name='email'
-                      value={email}
-                      onChange={onInputChange}
-                      placeholder='Ingrese su correo electrónico'
-                    />
-                  </div>
-                  <div className='form-group'>
-                    <label htmlFor='password'>Contraseña</label>
-                    <input
-                      type='password'
-                      className='form-control'
-                      id='password'
-                      name='password'
-                      value={password}
-                      onChange={onInputChange}
-                      placeholder='Ingrese su contraseña'
-                    />
-                  </div>
-                  <br />
-                  {errorMessage && (
-                    <div className='alert alert-danger' role='alert'>
-                      {errorMessage}
-                    </div>
-                  )}
-
-                  <div className='form-group'>
-                    <div className='row'>
-                      <div className='col-md-4'>
-                        <button
-                          type='submit'
-                          className='btn btn-primary btn-lg btn-block'
-                          onClick={onLogin}
-                        >
-                          Iniciar Sesión
-                        </button>
-                      </div>
-                      <div className='col-md-8'>
-                        <button
-                          type='submit'
-                          className='btn btn-danger btn-lg btn-block'
-                          onClick={onLoginWithGoogle}
-                        >
-                          Inicia con Google
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className='form-group'>
-                    <Link to={"/register"} className=''>
-                      Aun no tienes cuenta? registrate aqui.{" "}
-                    </Link>
-                  </div>
-                </form>
-              </div>
-            </div>
+    <div
+      style={{
+        backgroundColor: "black",
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "20px",
+      }}
+    >
+      <div
+        style={{
+          backgroundColor: "#192734",
+          borderRadius: "10px",
+          padding: "30px",
+          width: "100%",
+          maxWidth: "400px",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <h2 style={{ color: "white", textAlign: "center", marginBottom: "20px" }}>
+          Iniciar Sesión
+        </h2>
+        <form>
+          <div style={{ marginBottom: "15px" }}>
+            <label htmlFor="email" style={{ color: "#8899A6" }}>
+              Correo Electrónico
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={email}
+              onChange={onInputChange}
+              placeholder="Ingrese su correo electrónico"
+              style={{
+                width: "100%",
+                padding: "10px",
+                borderRadius: "5px",
+                border: "1px solid #38444D",
+                backgroundColor: "#253341",
+                color: "white",
+              }}
+            />
           </div>
-        </div>
+          <div style={{ marginBottom: "15px" }}>
+            <label htmlFor="password" style={{ color: "#8899A6" }}>
+              Contraseña
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={password}
+              onChange={onInputChange}
+              placeholder="Ingrese su contraseña"
+              style={{
+                width: "100%",
+                padding: "10px",
+                borderRadius: "5px",
+                border: "1px solid #38444D",
+                backgroundColor: "#253341",
+                color: "white",
+              }}
+            />
+          </div>
+          {errorMessage && (
+            <div style={{ color: "red", marginBottom: "15px", textAlign: "center" }}>
+              {errorMessage}
+            </div>
+          )}
+          <button
+            type="button"
+            onClick={onLogin}
+            style={{
+              width: "100%",
+              padding: "10px",
+              borderRadius: "5px",
+              backgroundColor: "#1DA1F2",
+              color: "white",
+              border: "none",
+              fontWeight: "bold",
+              cursor: "pointer",
+              marginBottom: "10px",
+            }}
+          >
+            Iniciar Sesión
+          </button>
+          <button
+            type="button"
+            onClick={onLoginWithGoogle}
+            style={{
+              width: "100%",
+              padding: "10px",
+              borderRadius: "5px",
+              backgroundColor: "#DB4437",
+              color: "white",
+              border: "none",
+              fontWeight: "bold",
+              cursor: "pointer",
+            }}
+          >
+            Iniciar con Google
+          </button>
+          <div style={{ textAlign: "center", marginTop: "15px" }}>
+            <Link to={"/register"} style={{ color: "#1DA1F2", textDecoration: "none" }}>
+              ¿Aún no tienes cuenta? Regístrate aquí.
+            </Link>
+          </div>
+        </form>
       </div>
-    </>
+    </div>
   );
 };
