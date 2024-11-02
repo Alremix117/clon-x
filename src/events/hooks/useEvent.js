@@ -49,6 +49,7 @@ export const useEvent = (loggedUser, dispatch) => {
         payload: events,
       };
 
+      
       dispatch(action);
     } catch (error) {
       const action = {

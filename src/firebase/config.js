@@ -4,12 +4,12 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore/lite";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAB9XikOLd-dbOFvewlFLU-bRdYoGqButI",
-  authDomain: "twitter-7f6a2.firebaseapp.com",
-  projectId: "twitter-7f6a2",
-  storageBucket: "twitter-7f6a2.firebasestorage.app",
-  messagingSenderId: "879169014674",
-  appId: "1:879169014674:web:0ee92db745795181b04f4b"
+  apiKey: "AIzaSyA56UGBAOG1hK0sK9Q-PjKua8q5iPGOWs0",
+  authDomain: "xcopia-247b1.firebaseapp.com",
+  projectId: "xcopia-247b1",
+  storageBucket: "xcopia-247b1.firebasestorage.app",
+  messagingSenderId: "217064444356",
+  appId: "1:217064444356:web:37301bd8796bed557d9491"
 };
 
 // Initialize Firebase
