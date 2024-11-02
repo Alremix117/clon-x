@@ -101,6 +101,7 @@ export const Following = () => {
         </nav>
       </div>
 
+
       <div
         style={{
           width: "60%",
