@@ -72,7 +72,7 @@ export const NewEventPage = () => {
         <form>
           <div style={{ marginBottom: "15px" }}>
             <label htmlFor="name" style={{ color: "#8899A6" }}>
-              Nombre del post
+              Texto post
             </label>
             <input
               type="text"

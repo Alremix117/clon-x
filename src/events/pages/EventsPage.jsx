@@ -52,6 +52,10 @@ export const EventsPage = () => {
             alignItems: "center",
             paddingTop: "20px",
             backgroundColor: "black",
+            position: "sticky", // Mantiene la barra lateral visible
+            top: 0, // Se fija en la parte superior al hacer scroll
+            height: "100vh", // Asegura que ocupe toda la altura
+            overflowY: "auto", // Permite el scroll si es necesario
           }}
         >
           <img
@@ -124,6 +128,18 @@ export const EventsPage = () => {
                   Post
                 </Link>
               </li>
+              <li style={{ marginBottom: "20px" }}>
+                <Link
+                  to="/usersprofile"
+                  style={{
+                    color: "white",
+                    fontSize: "20px",
+                    textDecoration: "none",
+                  }}
+                >
+                  Users
+                </Link>
+              </li>
             </ul>
           </nav>
           <button
@@ -150,6 +166,8 @@ export const EventsPage = () => {
             padding: "20px",
             borderLeft: "1px solid #38444D",
             borderRight: "1px solid #38444D",
+            height: "100vh", // Asegura que ocupe toda la altura
+            overflowY: "auto", // Permite el scroll si es necesario
           }}
         >
           <h2 style={{ color: "white", marginBottom: "20px" }}>
@@ -157,37 +175,40 @@ export const EventsPage = () => {
           </h2>
 
           {/* Events List */}
-          <div className="row">
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+          >
             {events.map((event) => (
-              <div className="col-md-6 col-lg-4 mb-4" key={event.id}>
-                <div
-                  className="card animate__animated animate__fadeInUp"
+              <div
+                key={event.id}
+                style={{
+                  backgroundColor: "#192734",
+                  padding: "10px",
+                  borderRadius: "10px",
+                  cursor: "pointer",
+                  width: "90%",
+                  margin: "0 auto",
+                }}
+                onClick={() => handleEventClick(event)}
+              >
+                <img
+                  src={event.imageUrl}
+                  alt={`Imagen del evento ${event.name}`}
                   style={{
-                    backgroundColor: "#192734",
-                    padding: "15px",
+                    width: "100%",
+                    height: "150px",
+                    objectFit: "cover",
                     borderRadius: "10px",
-                    marginBottom: "20px",
+                    marginBottom: "10px",
                   }}
-                  onClick={() => handleEventClick(event)}
-                >
-                  <img
-                    src={event.imageUrl}
-                    alt={`Imagen del evento ${event.name}`}
-                    style={{
-                      width: "100%",
-                      height: "200px",
-                      objectFit: "cover",
-                      borderRadius: "10px",
-                      marginBottom: "10px",
-                    }}
-                  />
-                  <h3 style={{ color: "white" }}>{event.name}</h3>
-                  <p style={{ color: "#8899A6" }}>{event.description}</p>
-                  <p style={{ color: "#8899A6" }}>
-                    Creado por: {event.createdBy} <br />
-                    Fecha de creación: {new Date(event.createdAt).toLocaleString()}
-                  </p>
-                </div>
+                />
+                <h3 style={{ color: "white", fontSize: "18px" }}>{event.name}</h3>
+                <p style={{ color: "#8899A6" }}>{event.description}</p>
+                <p style={{ color: "#8899A6" }}>
+                  Creado por: {event.createdBy} <br />
+                  Fecha de creación:{" "}
+                  {new Date(event.createdAt).toLocaleString()}
+                </p>
               </div>
             ))}
           </div>
@@ -203,6 +224,10 @@ export const EventsPage = () => {
             width: "20%",
             padding: "20px",
             color: "white",
+            position: "sticky", // Mantiene la sección de tendencias visible
+            top: 0, // Se fija en la parte superior al hacer scroll
+            height: "100vh", // Asegura que ocupe toda la altura
+            overflowY: "auto", // Permite el scroll si es necesario
           }}
         >
           <h3 style={{ color: "white", marginBottom: "20px" }}>Trends</h3>

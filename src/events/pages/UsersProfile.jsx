@@ -100,18 +100,7 @@ export const UsersProfile = () => {
                   Followers
                 </Link>
               </li>
-              <li style={{ marginBottom: "20px" }}>
-                <Link
-                  to="/post"
-                  style={{
-                    color: "white",
-                    fontSize: "20px",
-                    textDecoration: "none",
-                  }}
-                >
-                  Post
-                </Link>
-              </li>
+              
             </ul>
           </nav>
 
