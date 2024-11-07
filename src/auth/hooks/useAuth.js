@@ -1,102 +1,55 @@
-import {
-  authUser,
-  registerUser,
-  authWithGoogle,
-} from "../../firebase/authProviders";
+import { authUser, registerUser, authWithGoogle } from "../../firebase/authProviders";
 import { authTypes } from "../types/authTypes";
 
 export const useAuth = (dispatch) => {
   const logInUser = async (email, password) => {
-    const { ok, uid, photoURL, displayName, errorMessage } = await authUser(
-      email,
-      password
-    );
-
+    const { ok, uid, photoURL, displayName, errorMessage } = await authUser(email, password);
     if (!ok) {
       dispatch({ type: authTypes.error, payload: { errorMessage } });
       return false;
     }
 
     const payload = { uid, email, photoURL, displayName };
-
-    const action = {
-      type: authTypes.logIn,
-      payload,
-    };
-
     localStorage.setItem("user", JSON.stringify(payload));
-
-    dispatch(action);
+    dispatch({ type: authTypes.logIn, payload });
 
     return true;
   };
 
   const logOutUser = () => {
     localStorage.removeItem("user");
-
-    const action = {
-      type: authTypes.logOut,
-    };
-
-    dispatch(action);
+    dispatch({ type: authTypes.logOut });
   };
 
   const signUpUser = async (email, password, displayName) => {
-    const { ok, uid, photoURL, errorMessage } = await registerUser(
-      email,
-      password,
-      displayName
-    );
-
+    const { ok, uid, photoURL, errorMessage } = await registerUser(email, password, displayName);
     if (!ok) {
       dispatch({ type: authTypes.error, payload: { errorMessage } });
       return false;
     }
 
     const payload = { uid, email, photoURL, displayName };
-
-    const action = {
-      type: authTypes.logIn,
-      payload,
-    };
-
     localStorage.setItem("user", JSON.stringify(payload));
-
-    dispatch(action);
+    dispatch({ type: authTypes.logIn, payload });
 
     return true;
   };
 
   const logInWithGoogle = async () => {
     const { ok, uid, displayName, email, photoURL, errorMessage } = await authWithGoogle();
-  
     if (!ok) {
       dispatch({ type: authTypes.error, payload: { errorMessage } });
       return false;
     }
-  
-    // Extraer el primer nombre
-    const firstName = displayName.split(" ")[0]; // Obtener el primer nombre
-  
-    const payload = {
-      uid,
-      email,
-      displayName, // Nombre completo
-      firstName,   // Primer nombre
-      photoURL,
-    };
-  
-    const action = {
-      type: authTypes.logIn,
-      payload,
-    };
-  
+
+    const firstName = displayName.split(" ")[0];
+    const payload = { uid, email, displayName, firstName, photoURL };
+
     localStorage.setItem("user", JSON.stringify(payload));
-    dispatch(action);
-  
+    dispatch({ type: authTypes.logIn, payload });
+
     return true;
   };
-  
 
   return { logInUser, logOutUser, signUpUser, logInWithGoogle };
 };

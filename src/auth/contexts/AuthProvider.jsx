@@ -10,22 +10,16 @@ const initialState = {
 
 const init = () => {
   const user = JSON.parse(localStorage.getItem("user"));
-
-  const isLogged = !user ? false : true;
-
-  const state = {
+  const isLogged = user ? true : false;
+  return {
     logged: isLogged,
     user,
   };
-
-  return state;
 };
 
 export const AuthProvider = ({ children }) => {
   const [authState, dispatch] = useReducer(authReducer, initialState, init);
-
-  const { logInUser, logOutUser, signUpUser, logInWithGoogle } =
-    useAuth(dispatch);
+  const { logInUser, logOutUser, signUpUser, logInWithGoogle } = useAuth(dispatch);
 
   return (
     <AuthContext.Provider
