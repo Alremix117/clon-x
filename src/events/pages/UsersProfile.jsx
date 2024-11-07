@@ -1,25 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LogoA from "../../img/LogoA.png";
 import { Link } from "react-router-dom";
+import { collection, getDocs } from "firebase/firestore/lite";
+import { FirebaseDB } from "../../firebase/config"; // Asegúrate de que esta importación sea correcta
 
 export const UsersProfile = () => {
-  
-  const user = {
-    name: "Nombre del Usuario",
-    username: "@nombredeusuario",
-    bio: "Esta es la biografía del usuario.",
-    followers: 150,
-    following: 75,
-    tweets: 120,
-  };
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true); // Para controlar la carga
+  const [error, setError] = useState(null); // Para mostrar errores si los hay
 
-  const posts = Array.from({ length: 10 }, (_, index) => ({
-    id: index + 1,
-    content: `Este es un ejemplo de tweets del usuario ${index + 1}.`,
-    date: `Fecha de publicación ${index + 1}`,
-  }));
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const usersCollection = collection(FirebaseDB, "users");
+        const usersSnapshot = await getDocs(usersCollection);
+        
+        // Revisamos si existen documentos
+        if (usersSnapshot.empty) {
+          console.warn("No users found in Firestore.");
+          setError("No users found.");
+        } else {
+          const usersList = usersSnapshot.docs.map((doc) => doc.data());
+          setUsers(usersList); // Guardamos los datos en el estado
+        }
+      } catch (error) {
+        console.error("Error fetching users: ", error);
+        setError("Failed to fetch users.");
+      } finally {
+        setLoading(false); // Finalizamos la carga
+      }
+    };
+    
+    fetchUsers();
+  }, []);
 
-  
+  if (loading) {
+    return <p>Loading users...</p>; // Mensaje de carga
+  }
+
+  if (error) {
+    return <p style={{ color: "red" }}>{error}</p>; // Mensaje de error si falla
+  }
 
   return (
     <>
@@ -100,11 +121,8 @@ export const UsersProfile = () => {
                   Followers
                 </Link>
               </li>
-              
             </ul>
           </nav>
-
-          
         </div>
 
         <div
@@ -113,74 +131,29 @@ export const UsersProfile = () => {
             padding: "20px",
             borderLeft: "1px solid #38444D",
             borderRight: "1px solid #38444D",
-            backgroundColor: "black", 
+            backgroundColor: "black",
             borderRadius: "10px",
             color: "white",
             overflowY: "auto",
-            height: "100vh", 
+            height: "100vh",
           }}
         >
-          <h1 style={{ marginBottom: "10px" }}>Perfil de {user.name}</h1>
-          <h2 style={{ marginBottom: "10px", color: "#8899A6" }}>{user.username}</h2>
-          <p style={{ marginBottom: "20px", color: "#8899A6" }}>{user.bio}</p>
-          <div>
-            <p style={{ marginBottom: "10px" }}>
-              <strong>Seguidores:</strong> {user.followers} |{" "}
-              <strong>Siguiendo:</strong> {user.following} |{" "}
-              <strong>Tweets:</strong> {user.tweets}
-            </p>
-            <button
-              style={{
-                padding: "10px 20px",
-                backgroundColor: "#1DA1F2", 
-                color: "white",
-                borderRadius: "50px",
-                border: "none",
-                fontWeight: "bold",
-                cursor: "pointer",
-              }}
-            >
-              Seguir
-            </button>
-          </div>
-
-          <h3 style={{ marginTop: "20px" }}>Publicaciones:</h3>
-          <div>
-            {posts.map((post) => (
-              <div
-                key={post.id}
-                style={{
-                  backgroundColor: "#192734", 
-                  padding: "15px",
-                  borderRadius: "10px",
-                  marginBottom: "20px",
-                }}
-              >
-                <p style={{ color: "white" }}>{post.content}</p>
-                <p style={{ color: "#8899A6" }}>{post.date}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div
-          style={{
-            width: "20%",
-            padding: "20px",
-            color: "white",
-          }}
-        >
-          <h3 style={{ color: "white", marginBottom: "20px" }}>Trends</h3>
-          <ul style={{ listStyle: "none", padding: 0 }}>
-            <li style={{ marginBottom: "10px", color: "#8899A6" }}>
-              #TrendingTopic1
-            </li>
-            <li style={{ marginBottom: "10px", color: "#8899A6" }}>
-              #TrendingTopic2
-            </li>
-            <li style={{ marginBottom: "10px", color: "#8899A6" }}>
-              #TrendingTopic3
-            </li>
+          <h1>Usuarios Registrados</h1>
+          <ul>
+            {users.length > 0 ? (
+              users.map((user, index) => (
+                <li key={index} style={{ marginBottom: "20px" }}>
+                  <h2 style={{ color: "#1DA1F2" }}>{user.displayName || "Unknown User"}</h2>
+                  <p>{user.email || "No email provided"}</p>
+                  {user.bio && <p>{user.bio}</p>}
+                  <p>
+                    <strong>Followers:</strong> {user.followers || 0} | <strong>Following:</strong> {user.following || 0}
+                  </p>
+                </li>
+              ))
+            ) : (
+              <p>No users to display.</p> // Mensaje si no hay usuarios
+            )}
           </ul>
         </div>
       </div>

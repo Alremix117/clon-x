@@ -159,27 +159,7 @@ export const Profile = () => {
           </div>
         </div>
 
-        {/* Sección de tendencias */}
-        <div
-          style={{
-            width: "20%",
-            padding: "20px",
-            color: "white",
-          }}
-        >
-          <h3 style={{ color: "white", marginBottom: "20px" }}>Tendencias</h3>
-          <ul style={{ listStyle: "none", padding: 0 }}>
-            <li style={{ marginBottom: "10px", color: "#8899A6" }}>
-              #Tendencia1
-            </li>
-            <li style={{ marginBottom: "10px", color: "#8899A6" }}>
-              #Tendencia2
-            </li>
-            <li style={{ marginBottom: "10px", color: "#8899A6" }}>
-              #Tendencia3
-            </li>
-          </ul>
-        </div>
+        
       </div>
     </>
   );

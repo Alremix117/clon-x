@@ -175,20 +175,7 @@ export const Followers = () => {
         </div>
       </div>
 
-      <div
-        style={{
-          width: "20%",
-          padding: "20px",
-          color: "white",
-        }}
-      >
-        <h3 style={{ color: "white", marginBottom: "20px" }}>Trends</h3>
-        <ul style={{ listStyle: "none", padding: 0 }}>
-          <li style={{ marginBottom: "10px", color: "#8899A6" }}>#TrendingTopic1</li>
-          <li style={{ marginBottom: "10px", color: "#8899A6" }}>#TrendingTopic2</li>
-          <li style={{ marginBottom: "10px", color: "#8899A6" }}>#TrendingTopic3</li>
-        </ul>
-      </div>
+      
     </div>
   );
 };

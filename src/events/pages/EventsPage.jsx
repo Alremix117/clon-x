@@ -218,31 +218,8 @@ export const EventsPage = () => {
           )}
         </div>
 
-        {/* Trends Section */}
-        <div
-          style={{
-            width: "20%",
-            padding: "20px",
-            color: "white",
-            position: "sticky", // Mantiene la sección de tendencias visible
-            top: 0, // Se fija en la parte superior al hacer scroll
-            height: "100vh", // Asegura que ocupe toda la altura
-            overflowY: "auto", // Permite el scroll si es necesario
-          }}
-        >
-          <h3 style={{ color: "white", marginBottom: "20px" }}>Trends</h3>
-          <ul style={{ listStyle: "none", padding: 0 }}>
-            <li style={{ marginBottom: "10px", color: "#8899A6" }}>
-              #TrendingTopic1
-            </li>
-            <li style={{ marginBottom: "10px", color: "#8899A6" }}>
-              #TrendingTopic2
-            </li>
-            <li style={{ marginBottom: "10px", color: "#8899A6" }}>
-              #TrendingTopic3
-            </li>
-          </ul>
-        </div>
+        
+        
       </div>
     </>
   );
