@@ -1,44 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import LogoA from "../../img/LogoA.png";
 import { Link } from "react-router-dom";
-import { collection, getDocs } from "firebase/firestore/lite";
-import { FirebaseDB } from "../../firebase/config";
+import { EventContext } from "../contexts/EventContext";
 
 export const UsersProfile = () => {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { eventState, loadUsers } = useContext(EventContext);
+  const { users = [], errorMessage } = eventState; // Default value for users as an empty array
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const usersCollection = collection(FirebaseDB, "users");
-        const querySnapshot = await getDocs(usersCollection);
+    // Llama a loadUsers solo si users no tiene datos
+    if (!users || users.length === 0) {
+      loadUsers();
+    }
+  }, [users, loadUsers]);
 
-        const userList = querySnapshot.docs.map((doc) => doc.data());
-        
-        if (userList.length > 0) {
-          setUsers(userList);
-        } else {
-          setError("No users found.");
-        }
-      } catch (error) {
-        console.error("Error fetching users:", error);
-        setError("Failed to fetch users.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUsers();
-  }, []);
-
-  if (loading) {
+  if (!users) {
     return <p>Loading users...</p>;
   }
 
-  if (error) {
-    return <p style={{ color: "red" }}>{error}</p>;
+  if (errorMessage) {
+    return <p style={{ color: "red" }}>{errorMessage}</p>;
   }
 
   return (

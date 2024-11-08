@@ -60,5 +60,36 @@ export const useEvent = (loggedUser, dispatch) => {
     }
   };
 
-  return { saveEvent, loadEvents };
+  const loadUsers = async () => {
+    try {
+      const collectionRef = collection(FirebaseDB, "users");
+
+      const fbDocs = await getDocs(collectionRef);
+
+      const users = [];
+
+      fbDocs.forEach((doc) => {
+        users.push({
+          id: doc.id,
+          ...doc.data(),
+        });
+      });
+
+      const action = {
+        type: eventsTypes.loadUsers,
+        payload: users,
+      };
+
+      
+      dispatch(action);
+    } catch (error) {
+      const action = {
+        type: eventsTypes.error,
+        payload: { errorMessage: error.message },
+      };
+      dispatch(action);
+    }
+  };
+
+  return { saveEvent, loadEvents, loadUsers };
 };

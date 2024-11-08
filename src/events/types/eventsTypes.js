@@ -1,5 +1,6 @@
 export const eventsTypes = {
-  loadEvents: "[EVT] load",
+  loadEvents: "[EVT] loadEvents",
+  loadUsers: "[EVT] loadUsers",
   saveEvent: "[EVT] save",
   updateEvent: "[EVT] update",
   error: "[EVT] error",

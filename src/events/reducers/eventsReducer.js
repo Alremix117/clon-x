@@ -8,29 +8,30 @@ export const eventsReducer = (state = {}, action) => {
         events: [...action.payload],
       };
 
-      case eventsTypes.saveEvent:
-        return {
-          ...state,
-          events: [...state.events, action.payload], // Usar el operador de propagación
-        };
-      
+    case eventsTypes.saveEvent:
+      return {
+        ...state,
+        events: [...state.events, action.payload],
+      };
 
     case eventsTypes.updateEvent:
       return {
         ...state,
-        events: state.events.map((event) => {
-          if (event.id === action.payload.id) {
-            return { ...action.payload };
-          }
-
-          return event;
-        }),
+        events: state.events.map((event) =>
+          event.id === action.payload.id ? { ...action.payload } : event
+        ),
       };
 
     case eventsTypes.error:
       return {
         ...state,
         errorMessage: action.payload?.errorMessage,
+      };
+
+    case eventsTypes.loadUsers:
+      return {
+        ...state,
+        users: [...action.payload],
       };
 
     default:

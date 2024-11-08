@@ -1,5 +1,12 @@
 import { authUser, registerUser, authWithGoogle } from "../../firebase/authProviders";
 import { authTypes } from "../types/authTypes";
+import {
+  collection,
+  doc,
+  getDocs,
+  setDoc,
+} from "firebase/firestore/lite";
+import { FirebaseDB } from "../../firebase/config";
 
 export const useAuth = (dispatch) => {
   const logInUser = async (email, password) => {
@@ -46,6 +53,11 @@ export const useAuth = (dispatch) => {
     const payload = { uid, email, displayName, firstName, photoURL };
 
     localStorage.setItem("user", JSON.stringify(payload));
+    await setDoc(doc(FirebaseDB, "users", uid), {
+      displayName,
+      email,
+      userId: uid,
+    });
     dispatch({ type: authTypes.logIn, payload });
 
     return true;

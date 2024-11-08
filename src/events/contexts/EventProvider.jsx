@@ -6,6 +6,7 @@ import { useEvent } from "../hooks/useEvent";
 
 const initialState = {
   events: [],
+  users: [],
   errorMessage: null,
 };
 
@@ -23,10 +24,10 @@ export const EventProvider = ({ children }) => {
     authState: { user },
   } = useContext(AuthContext);
 
-  const { saveEvent, loadEvents } = useEvent(user, dispatch);
+  const { saveEvent, loadEvents, loadUsers } = useEvent(user, dispatch);
 
   return (
-    <EventContext.Provider value={{ eventState, saveEvent, loadEvents }}>
+    <EventContext.Provider value={{ eventState, saveEvent, loadEvents, loadUsers }}>
       {children}
     </EventContext.Provider>
   );
