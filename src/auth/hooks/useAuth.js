@@ -34,13 +34,21 @@ export const useAuth = (dispatch) => {
       dispatch({ type: authTypes.error, payload: { errorMessage } });
       return false;
     }
-
+  
+    // Guardar el usuario en Firestore
+    await setDoc(doc(FirebaseDB, "users", uid), {
+      displayName,
+      email,
+      userId: uid,
+    });
+  
     const payload = { uid, email, photoURL, displayName };
     localStorage.setItem("user", JSON.stringify(payload));
     dispatch({ type: authTypes.logIn, payload });
-
+  
     return true;
   };
+  
 
   const logInWithGoogle = async () => {
     const { ok, uid, displayName, email, photoURL, errorMessage } = await authWithGoogle();
