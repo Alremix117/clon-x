@@ -1,9 +1,4 @@
-import {
-  collection,
-  doc,
-  getDocs,
-  setDoc,
-} from "firebase/firestore/lite";
+import { collection, doc, getDocs, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../../firebase/config";
 import { eventsTypes } from "../types/eventsTypes";
 
@@ -49,7 +44,6 @@ export const useEvent = (loggedUser, dispatch) => {
         payload: events,
       };
 
-      
       dispatch(action);
     } catch (error) {
       const action = {
@@ -80,7 +74,6 @@ export const useEvent = (loggedUser, dispatch) => {
         payload: users,
       };
 
-      
       dispatch(action);
     } catch (error) {
       const action = {
@@ -91,5 +84,57 @@ export const useEvent = (loggedUser, dispatch) => {
     }
   };
 
-  return { saveEvent, loadEvents, loadUsers };
+  ///////////
+  const followUser = async (followedUserId) => {
+    try {
+      const followRef = doc(
+        collection(FirebaseDB, "follows"),
+        `${loggedUser.uid}_${followedUserId}`
+      );
+
+      await setDoc(followRef, {
+        followerId: loggedUser.uid,
+        followedId: followedUserId,
+        followedAt: new Date().toISOString(),
+      });
+
+      const action = {
+        type: eventsTypes.followUser,
+        payload: { followerId: loggedUser.uid, followedId: followedUserId },
+      };
+      dispatch(action);
+    } catch (error) {
+      console.error("Error following user:", error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message,
+      });
+    }
+  };
+
+  const loadFollowedUsers = async () => {
+    try {
+      const q = query(
+        collection(FirebaseDB, "follows"),
+        where("followerId", "==", loggedUser.uid)
+      );
+      const querySnapshot = await getDocs(q);
+
+      const followedUsers = [];
+      querySnapshot.forEach((doc) => {
+        followedUsers.push(doc.data().followedId);
+      });
+
+      const action = {
+        type: eventsTypes.loadFollowedUsers,
+        payload: followedUsers,
+      };
+      dispatch(action);
+    } catch (error) {
+      console.error("Error fetching followed users:", error.message);
+    }
+  };
+
+  return { saveEvent, loadEvents, loadUsers, followUser, loadFollowedUsers };
 };

@@ -34,6 +34,19 @@ export const eventsReducer = (state = {}, action) => {
         users: [...action.payload],
       };
 
+      case eventsTypes.followUser:
+        return {
+          ...state,
+          followedUsers: [...state.followedUsers, action.payload], // Agrega el nuevo seguido al estado
+        };
+      
+
+    case eventsTypes.loadFollowedUsers:
+      return {
+        ...state,
+        followedUsers: action.payload, // Add the followed users to the state
+      };
+
     default:
       return state;
   }

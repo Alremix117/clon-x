@@ -8,9 +8,9 @@ export const Profile = () => {
   const { authState } = useContext(AuthContext);
   const { user } = authState;
   const { eventState } = useContext(EventContext);
-  
+
   // Filtrar eventos creados por el usuario logueado
-  const userEvents = eventState.events.filter(event => event.userId === user.uid);
+  const userEvents = eventState.events.filter((event) => event.userId === user.uid);
 
   return (
     <>
@@ -18,19 +18,23 @@ export const Profile = () => {
         style={{
           backgroundColor: "black",
           width: "100%",
-          height: "100vh",
+          minHeight: "100vh",
           display: "flex",
           flexDirection: "row",
+          overflowY: "auto", // Permitir scroll en el contenido
         }}
       >
         <div
           style={{
-            width: "20%",
+            width: "15%", // Reducir ancho de la barra de navegación
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             paddingTop: "20px",
             backgroundColor: "black",
+            position: "sticky",
+            top: 0, // Barra fija al hacer scroll
+            height: "100vh",
           }}
         >
           <img
@@ -110,7 +114,7 @@ export const Profile = () => {
         {/* Contenido del perfil */}
         <div
           style={{
-            width: "60%",
+            width: "80%", // Expande el área de contenido
             padding: "20px",
             borderLeft: "1px solid #38444D",
             borderRight: "1px solid #38444D",
@@ -158,8 +162,6 @@ export const Profile = () => {
             )}
           </div>
         </div>
-
-        
       </div>
     </>
   );

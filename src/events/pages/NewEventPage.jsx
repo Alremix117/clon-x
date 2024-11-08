@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { EventContext } from "../contexts/EventContext";
 import { useForm } from "../../hooks/useForm";
 import Swal from "sweetalert2";
@@ -12,10 +12,9 @@ const newEmptyEvent = {
 
 export const NewEventPage = () => {
   const navigate = useNavigate();
-
   const { eventState: { errorMessage }, saveEvent } = useContext(EventContext);
-
   const { name, date, imageUrl, onInputChange } = useForm(newEmptyEvent);
+  const [charCount, setCharCount] = useState(0);
 
   const onCreateEvent = async (e) => {
     e.preventDefault();
@@ -42,6 +41,13 @@ export const NewEventPage = () => {
         title: "Oops...",
         text: errorMessage,
       });
+    }
+  };
+
+  const handleTextChange = (e) => {
+    if (e.target.value.length <= 280) {
+      onInputChange(e);
+      setCharCount(e.target.value.length);
     }
   };
 
@@ -79,9 +85,10 @@ export const NewEventPage = () => {
               id="name"
               name="name"
               value={name}
-              onChange={onInputChange}
-              placeholder="Ingrese el nombre del evento"
+              onChange={handleTextChange}
+              placeholder="Ingrese el texto del post"
               required
+              maxLength="280"
               style={{
                 width: "100%",
                 padding: "10px",
@@ -91,6 +98,9 @@ export const NewEventPage = () => {
                 color: "white",
               }}
             />
+            <small style={{ color: "#8899A6" }}>
+              {charCount}/280 caracteres
+            </small>
           </div>
           <div style={{ marginBottom: "15px" }}>
             <label htmlFor="date" style={{ color: "#8899A6" }}>

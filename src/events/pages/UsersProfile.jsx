@@ -3,8 +3,10 @@ import LogoA from "../../img/LogoA.png";
 import { Link } from "react-router-dom";
 import { EventContext } from "../contexts/EventContext";
 
+
 export const UsersProfile = () => {
-  const { eventState, loadUsers } = useContext(EventContext);
+  const { eventState, loadUsers, followUser } = useContext(EventContext);
+
   const { users = [], errorMessage } = eventState; // Default value for users as an empty array
 
   useEffect(() => {
@@ -21,6 +23,16 @@ export const UsersProfile = () => {
   if (errorMessage) {
     return <p style={{ color: "red" }}>{errorMessage}</p>;
   }
+
+  const handleFollow = (userId) => {
+    followUser(userId);  // Asegúrate de que esta función sea la correcta
+  };
+  
+
+  const handleUnfollow = (userId) => {
+    console.log(`Unfollow user with ID: ${userId}`);
+    // Add unfollow functionality here (e.g., make an API call to unfollow the user)
+  };
 
   return (
     <div
@@ -131,6 +143,39 @@ export const UsersProfile = () => {
                   <strong>Followers:</strong> {user.followers || 0} |{" "}
                   <strong>Following:</strong> {user.following || 0}
                 </p>
+
+                {/* Follow/Unfollow Buttons */}
+                <div style={{ marginTop: "10px" }}>
+                  {user.isFollowing ? (
+                    <button
+                      onClick={() => handleUnfollow(user.id)}
+                      style={{
+                        backgroundColor: "#ff0000",
+                        color: "white",
+                        padding: "10px 20px",
+                        border: "none",
+                        cursor: "pointer",
+                        borderRadius: "5px",
+                      }}
+                    >
+                      Unfollow
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => handleFollow(user.id)}
+                      style={{
+                        backgroundColor: "#1DA1F2",
+                        color: "white",
+                        padding: "10px 20px",
+                        border: "none",
+                        cursor: "pointer",
+                        borderRadius: "5px",
+                      }}
+                    >
+                      Follow
+                    </button>
+                  )}
+                </div>
               </li>
             ))
           ) : (

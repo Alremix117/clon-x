@@ -7,14 +7,12 @@ import { useEvent } from "../hooks/useEvent";
 const initialState = {
   events: [],
   users: [],
+  followedUsers: [], // Ahora siempre está definido
   errorMessage: null,
 };
 
 const init = () => {
-  return {
-    events: [],
-    errorMessage: null,
-  };
+  return { ...initialState };
 };
 
 export const EventProvider = ({ children }) => {
@@ -24,10 +22,10 @@ export const EventProvider = ({ children }) => {
     authState: { user },
   } = useContext(AuthContext);
 
-  const { saveEvent, loadEvents, loadUsers } = useEvent(user, dispatch);
+  const { saveEvent, loadEvents, loadUsers, followUser, loadFollowedUsers } = useEvent(user, dispatch);
 
   return (
-    <EventContext.Provider value={{ eventState, saveEvent, loadEvents, loadUsers }}>
+    <EventContext.Provider value={{ eventState, saveEvent, loadEvents, loadUsers, followUser, loadFollowedUsers }}>
       {children}
     </EventContext.Provider>
   );
