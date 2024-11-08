@@ -21,10 +21,8 @@ export const EventsPage = () => {
     loadEvents();
   }, [loadEvents]);
 
-  const handleEventClick = (event) => {
-    if (event.userId !== user.uid) {
-      navigate("/UsersProfile");
-    }
+  const handleUserClick = (createdBy) => {
+    navigate(`/usersprofile/${createdBy}`);
   };
 
   const handleLogout = () => {
@@ -52,19 +50,16 @@ export const EventsPage = () => {
             alignItems: "center",
             paddingTop: "20px",
             backgroundColor: "black",
-            position: "sticky", // Mantiene la barra lateral visible
-            top: 0, // Se fija en la parte superior al hacer scroll
-            height: "100vh", // Asegura que ocupe toda la altura
-            overflowY: "auto", // Permite el scroll si es necesario
+            position: "sticky",
+            top: 0,
+            height: "100vh",
+            overflowY: "auto",
           }}
         >
           <img
             src={LogoA}
             alt="LogoA"
-            style={{
-              width: "200px",
-              height: "200px",
-            }}
+            style={{ width: "200px", height: "200px" }}
           />
           <nav>
             <ul style={{ listStyle: "none", padding: 0 }}>
@@ -166,8 +161,8 @@ export const EventsPage = () => {
             padding: "20px",
             borderLeft: "1px solid #38444D",
             borderRight: "1px solid #38444D",
-            height: "100vh", // Asegura que ocupe toda la altura
-            overflowY: "auto", // Permite el scroll si es necesario
+            height: "100vh",
+            overflowY: "auto",
           }}
         >
           <h2 style={{ color: "white", marginBottom: "20px" }}>
@@ -189,7 +184,6 @@ export const EventsPage = () => {
                   width: "90%",
                   margin: "0 auto",
                 }}
-                onClick={() => handleEventClick(event)}
               >
                 <img
                   src={event.imageUrl}
@@ -202,10 +196,19 @@ export const EventsPage = () => {
                     marginBottom: "10px",
                   }}
                 />
-                <h3 style={{ color: "white", fontSize: "18px" }}>{event.name}</h3>
+                <h3 style={{ color: "white", fontSize: "18px" }}>
+                  {event.name}
+                </h3>
                 <p style={{ color: "#8899A6" }}>{event.description}</p>
                 <p style={{ color: "#8899A6" }}>
-                  Creado por: {event.createdBy} <br />
+                  Creado por:{" "}
+                  <span
+                    onClick={() => handleUserClick(event.createdBy)}
+                    style={{ color: "#1DA1F2", cursor: "pointer" }}
+                  >
+                    {event.createdBy}
+                  </span>{" "}
+                  <br />
                   Fecha de creación:{" "}
                   {new Date(event.createdAt).toLocaleString()}
                 </p>
@@ -217,9 +220,6 @@ export const EventsPage = () => {
             <p style={{ color: "red" }}>Error loading events: {errorMessage}</p>
           )}
         </div>
-
-        
-        
       </div>
     </>
   );
