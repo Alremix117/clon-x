@@ -3,7 +3,6 @@ import LogoA from "../../img/LogoA.png";
 import { Link } from "react-router-dom";
 import { EventContext } from "../contexts/EventContext";
 
-
 export const UsersProfile = () => {
   const { eventState, loadUsers, followUser } = useContext(EventContext);
 
@@ -25,9 +24,8 @@ export const UsersProfile = () => {
   }
 
   const handleFollow = (userId) => {
-    followUser(userId);  // Asegúrate de que esta función sea la correcta
+    followUser(userId); // Asegúrate de que esta función sea la correcta
   };
-  
 
   const handleUnfollow = (userId) => {
     console.log(`Unfollow user with ID: ${userId}`);

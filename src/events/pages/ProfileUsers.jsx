@@ -95,13 +95,17 @@ const ProfileUsers = () => {
                       />
                       <h3 style={{ color: "white" }}>{event.name}</h3>
                       <p style={{ color: "#8899A6" }}>{event.description}</p>
-                      <p style={{ color: "#8899A6" }}>Creado por: {userInfo.displayName}</p>
+                      <p style={{ color: "#8899A6" }}>
+                        Creado por: {userInfo.displayName}
+                      </p>
                       <p style={{ color: "#8899A6" }}>Fecha: {event.date}</p>
                     </div>
                   </div>
                 ))
               ) : (
-                <p style={{ color: "#8899A6" }}>No se encontraron eventos para este usuario.</p>
+                <p style={{ color: "#8899A6" }}>
+                  No se encontraron eventos para este usuario.
+                </p>
               )}
             </div>
           </>
