@@ -4,12 +4,12 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore/lite";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDjcNRQWu2xb8z1cJCBZAz6Hlul-Rkl980",
-  authDomain: "twitter-clone-9d88b.firebaseapp.com",
-  projectId: "twitter-clone-9d88b",
-  storageBucket: "twitter-clone-9d88b.firebasestorage.app",
-  messagingSenderId: "318507338176",
-  appId: "1:318507338176:web:50b91c192c92778d336025"
+  apiKey: "AIzaSyC6A6du4I4R_rMuAVuRbJtZyuBeGhVFN_g",
+  authDomain: "clondetwiter.firebaseapp.com",
+  projectId: "clondetwiter",
+  storageBucket: "clondetwiter.firebasestorage.app",
+  messagingSenderId: "254036761568",
+  appId: "1:254036761568:web:69e6ab6afa3d0cec632985"
 };
 
 // Initialize Firebase
